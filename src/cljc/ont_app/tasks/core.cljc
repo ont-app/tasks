@@ -52,10 +52,12 @@
 (def ontology-cache (atom nil))
 (defn ontology []
   "The supporting ontology for prototypes, as an Igraph.graph, using keyword
-  identifiers interned per ont-app.vocabulary. 
+  identifiers interned per ont-app.vocabulary. Includes the prototypes ontology.
   "
   (when-not @ontology-cache
     (reset! ontology-cache
-            (read-ontology)))
+            (-> (read-ontology)
+                (igraph/union (proto/ontology)
+                ))))
   @ontology-cache)
 
