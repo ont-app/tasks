@@ -1,0 +1,531 @@
+# -*- mode:ttl;mode:ont -*-
+@base  <http://rdf.naturallexicon.org/tasks/ont#>.
+@prefix : <#>
+@prefix ta: <#>
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix proto: <http://rdf.naturallexicon.org/prototypes/ont#>.
+@prefix vol: <http://rdf.naturallexicon.org/volumes/ont#>.
+@prefix dc: <http://purl.org/dc/elements/1.1/>.
+
+<#> a owl:Ontology;
+    rdfs:label "Task analysis";
+    rdfs:comment """
+
+    A simple vocabulary dedicated to the pursuit of user goals,
+    typically in a computer interface.
+
+        """;
+    vol:addressedTo <#Graph>;
+    owl:imports <http://rdf.naturallexicon.org/prototypes/ont#>,
+                 <http://rdf.naturallexicon.org/volumes/ont#>;
+    .
+
+<#Graph> proto:elaborates vol:CatalogVolume;
+  rdfs:comment """
+  The graph to which the Task Analysis ontology is addressed.
+  """;
+    .
+
+dc:description a proto:OcclusiveProperty;
+    rdfs:comment """
+    rdfs:comment is inclusive, dc:description is occlusive.  Use
+    dc:description to specify the docstring to be rendered in the
+    browser.  
+        """;
+        .
+
+<#planDescription> rdfs:subPropertyOf dc:description;
+    a proto:OcclusiveProperty;
+    rdfs:comment """
+        <goal> ta:planDescription <description>
+        Asserts that <description> documents the place of <goal>
+        in the overall plan of execution for the host application.
+        Typically it starts off 'In order to .... it is necessary|helpful...
+        to ..., followed by a description of subgoals one might take, and
+        the circumstances under which you will be able to discern whether
+        and when to take such steps.
+        """;
+    .
+    
+## STATES
+<#State> a rdfs:Class;
+    rdfs:comment """
+        Refers to a state within the operation of the program. 
+        """;
+    .
+
+<#StateDisjunction> a proto:Prototype;
+    rdfs:subClassOf :State;
+    proto:hasParameter ta:option;
+    rdfs:comment """
+        Refers to a state describable as one of a plurality of states.
+        """;
+    .
+
+<#option> a rdf:Property;
+    rdfs:domain :StateDisjunction;
+    rdfs:range :State;
+    rdfs:comment """
+        <disjunctive state> ta:option <state>
+        Asserts that we are in <disjunctive state> if we are in <state>
+        """;
+    .
+    
+<#Event> a rdfs:Class;
+        rdfs:comment """
+        Refers to an event while using an interface.
+        """;
+        .
+
+<#subEventOf> a proto:InclusiveProperty;
+    rdfs:comment """
+        <Event> ta:subEventOf <Larger Event>
+        Asserts that <Event> happens in the course of <LargerEvent>
+        """;
+    .
+        
+<#Process> a rdfs:Class;
+    rdfs:comment """
+
+        Refers to a process characterized by a set of typical states
+        which follow each other in a cycle.
+
+        """;
+    .
+
+<#conditionedOn> a proto:InclusiveProperty;
+    rdfs:comment """
+        <event> ta:conditionedOn <state>;
+
+        Asserts that any process involving <event> must be in <state> for
+        <event> to occur.
+        """;
+    .
+
+<#engageWhen> a proto:InclusiveProperty;
+    rdfs:domain :Process;
+    rdfs:range :State;
+    rdfs:comment """
+        <process> ta:engageWhen <state>
+        Asserts that <process> is expected be initiated when in <State>.
+        """;
+    owl:seeAlso :disengageWhen;
+    .
+
+<#disengageWhen> a proto:InclusiveProperty;
+    rdfs:domain :Process;
+    rdfs:range :State;
+    rdfs:comment """
+        <process> ta:disengageWhen <state>
+        Asserts that <process> is expected continue until we encounter <state>.
+        """;
+    owl:seeAlso :engageWhen;
+    .
+    
+<#outcomeOf> a proto:InclusiveProperty;
+    rdfs:comment """
+        <state> ta:outcomeOf <event>
+
+    Asserts thate <state> describes the expected outcome of <event>.
+    
+    This is typically expressed using the past particple X'd.
+    
+        """;
+        .
+
+<#Operator> a proto:Prototype;
+    a rdfs:Class;
+    proto:hasParameter ta:operatorLabel;
+    proto:hasParameter ta:causes;
+    rdfs:comment """
+        Something on the interface that changes the state of the system.
+        """;
+    .
+
+<#operatorLabel> a proto:OcclusiveProperty;
+    rdfs:comment """
+        <Operator> ta:operatorLabel <Label>
+        Asserts that when rendered in the interface it should
+        be rendered as <Label>
+        """;
+    .
+    
+
+<#causedBy> a proto:InclusiveProperty;
+    rdfs:domain :Event;
+    rdfs:range :Operator;
+    rdfs:comment """
+        <Event> ta:causedBy <Operator>.
+        Asserts that the effect of using <Operator> is to cause <Event>
+        """;
+    .
+
+<#causes> a proto:InclusiveProperty;
+    owl:inverseOf :causedBy;
+    rdfs:comment """
+        <Operator> ta:causes <Event>.
+        Asserts that the effect of using <Operator> is to cause <Event>
+        """;
+    .
+    
+    
+
+<#followsInCycle> a proto:OcclusiveProperty;
+    rdfs:comment """
+        <event2> followsInCycle <event1>
+
+    Asserts that <event2> follows <event1> in a cycle of events in the
+    context of some process.
+
+        """;
+    .
+    
+
+<#determinedBy> a proto:InclusveProperty;
+    rdfs:domain ta:UserGoal;
+    rdfs:domain ta:KnowledgeGoal;
+    rdfs:comment """
+        <Goal> ta:determinedBy <Inspect Something>
+        Asserts that <Inspect something>  allows you 
+        to determine the status of <Goal>.
+        """;
+    .
+    
+## SERVICES and INTERFACES
+<#Service> a proto:Prototype;
+    rdfs:comment """
+    Refers to a software service dedicated to one or more user goals
+    """;
+        proto:hasParameter ta:dedicatedTo;
+    .
+<#dedicatedTo> a proto:InclusiveProperty;
+    rdfs:domain :Service;
+    rdfs:range :UserGoal;
+    rdfs:comment """
+
+    <interface> dedicatedTo <goal>
+
+    Asserts that <interface> aims to implement a plan for achieving <goal>
+
+    """;
+        
+        .
+
+<#UserInterface> proto:elaborates :Service;
+    a :Process;
+    rdfs:comment """
+        Refers to an interactive Service 
+        """;
+    proto:hasParameter :engageWhen;
+    proto:hasParameter :disengageWhen;
+    .
+        
+## USER GOALS
+<#UserGoal> a proto:Prototype;
+    a :UserGoal;
+    rdfs:comment """
+    
+        Refers to a goal pursued by you the user.
+
+    """;
+        proto:hasParameter :goalType;
+        .
+
+    
+<#goalType> a proto:OcclusiveProperty;
+    proto:domain :UserGoal;
+    rdfs:range :UserGoalClass;
+   rdfs:comment """
+        Refers to the unique primary class to which the referent goal 
+        belongs. Typically keyed on to set new goals.
+        """;
+    .
+
+<#KnowledgeGoal> proto:elaborates :UserGoal;
+    a :KnowledgeGoal;
+    rdfs:comment """
+        Refers to a goal to know something about the state of the 
+        application or the wider world, typically by inspecting
+        some part of the interface.
+        """;
+    proto:hasParameter :subject;
+    .
+
+<#subject> a proto:InclusiveProperty;
+    rdfs:domain :KnowledgeGoal;
+    rdfs:range rdf:Resource;
+    rdfs:comment """
+        <Knowabout> ta:subject <subject>;
+        Asserts that <Knowabout> is dedicated to knowing about <subject>
+        """;
+        
+    .
+    
+# <#supports> a proto:InclusiveProperty;
+#     rdfs:domain :UserGoal;
+#     rdfs:range :UserGoal;
+#     rdfs:comment """
+
+#     <narrower goal> ta:supports <wider goal>.
+
+#     Asserts that <narrower goal> meets one or more preconditions on the 
+#     success of <wider goal>.
+    
+#         """;
+#     .
+    
+
+##############################
+## SPECIFIC CLASSES OF GOALS
+#############################
+
+<#Specify> a proto:Prototype;
+    a :UserGoal;
+    proto:hasParameter :specified;
+    proto:hasParameter :forPurpose;
+    proto:hasParameter :as;
+    rdfs:comment """
+    <Specify> 
+        specified <thing>;
+        as <role>;
+        forPurpose <purpose>;
+
+    
+    Work as an ensemble to assert that <thing> should serve
+    <role> for <purpose>, typically such that
+    <purpose> <role> <thing>.
+        """;
+    .
+
+
+<#specified> a proto:InclusiveProperty;
+    rdfs:comment """
+        The thing specified in a goal to specify.
+        """;
+    .
+
+<#as> a proto:ExclusiveProperty;
+    rdfs:comment """
+        The role played by the specified thing(s)
+        """;
+    .
+<#forPurpose> a proto:ExclusiveProperty;
+    rdfs:comment """
+        The purpose for which the thing was specified.
+        """;
+    .
+    
+    
+<#Select> proto:elaborates :Specify;
+    a :Select;
+    proto:hasParameter :fromCandidates;
+    .
+
+<#fromCandidates> a proto:OcclusiveProperty; rdfs:comment """ 
+        
+    A collection of candidates from which the specified thing(s)
+    are selected.
+
+    """;
+        .
+
+<#SelectForPurpose> proto:elaborates :Select;
+    proto:hasParameter :forPurpose;
+    rdfs:comment """
+        Refers to a
+        """;
+        
+    .
+    
+## FINDING THINGS
+<#FindData> proto:elaborates :UserGoal;
+    rdfs:class :FindData;
+    proto:hasParameter :targetDescription;
+    .
+
+<#targetDescription> a proto:InclusiveProperty;
+    rdfs:domain <FindData>;
+    rdfs:range rdf:PlainLiteral;
+    rdfs:comment """
+    <find-data> ta:targetDescription <description>
+    
+    asserts <description> suits the data you are trying to find.
+        Where
+
+        """;
+        .
+        
+#######################
+## DECISION SUPPORT
+#######################
+<#Review> proto:elaborates :UserGoal;
+    a ta:KnowledgeGoal;
+    proto:hasParameter :query;
+    proto:hasParameter :queryFormat;
+    .
+
+
+<#query> a proto:ExclusiveProperty;
+    rdfs:domain :ReviewListing;
+    # range is unspecified and application-specific
+    rdfs:comment """
+
+    <Review> ta:query <query>.
+    <Review> ta:queryFormat <format>.
+
+    Asserts that <query> is in <format> 
+
+    Where
+    <query> is in an application-specific <format>
+        """;
+        .
+
+<#QueryFormat> a rdf:Class;
+    rdfs:comment """
+        Refers to a query format interpretable by some program as a query 
+        that supports finding some body of data.
+        """;
+    .
+
+<#queryFormat> a proto:ExclusiveProperty;
+    rdfs:range :QueryFormat;
+    rdfs:comment """
+
+    <ReviewListing> ta:listing <list>.
+    <ReviewListing> ta:query <query>.
+    <ReviewListing> ta:queryFormat <format>.
+
+    Asserts that <query> is in <format> and will generate data from which 
+    <list> can be inferred.
+
+    Where
+    <query> is in an application-specific <format>
+        """;
+        
+    .
+
+        
+# REVIEW LISTING
+<#ReviewListing> proto:elaborates :Review;
+    rdf:type :ReviewListing; # aggregates to resulting description
+    rdfs:comment """
+
+    Refers to a user goal to review a listing of some set of data.
+    
+    Typically supports an elaboration on <find-data>
+
+    """;
+        proto:hasParameter :listing;
+        proto:hasParameter :listingFormat;
+        .
+
+<#listing> a proto:ExclusiveProperty;
+    rdfs:domain :ReviewListing;
+    ## range is unspecified and application-specific
+    rdfs:comment """
+
+    <ReviewListing> ta:listing <list>.
+    <ReviewListing> ta:listingFormat <format>.
+
+
+    asserts that <list> contains the listing to review, and should
+    be rendered using <format>.
+    
+    Where
+    <list> is in an application-specific format.
+
+
+        """;
+        .
+
+<#ListingFormat> a rdf:Class;
+  rdfs:comment """
+        Refers to a format interpretable by some program as a list of 
+        objects.
+        """;
+    .
+    
+<#listingFormat> a proto:ExclusiveProperty;
+    rdfs:domain :ReviewListing;
+    rdfs:range :ListingFormat;
+    ## range is unspecified and application-specific
+    rdfs:comment """
+    <ReviewListing> ta:listing <list>.
+    <ReviewListing> ta:listingFormat <format>.
+
+    asserts that <list> contains the listing to review, and should
+    be rendered using <format>.
+    
+    Where
+    <list> is in an application-specific format.
+        """;
+        .
+
+## INSPECT ENTITY
+
+<#InspectEntity> proto:elaborates :KnowledgeGoal;
+    rdfs:comment """
+        A user goal to inspect a single entity.
+        """;
+    rdf:type :InspectEntity;
+    .
+
+<#ScanListingItem> proto:elaborates :KnowledgeGoal;
+    a :ScanListingItem;
+    rdfs:comment """
+        A user goal to glance at a brief summary of some entity in a listing.
+        """;
+    .
+    
+<#toScan> a proto:ExclusiveProperty;
+    rdfs:domain :ScanListingItem;
+    rdfs:range rdf:Resource;
+    rdfs:comment """
+        <Scan> ta:toScan <item> 
+        """;
+        
+    .
+    
+
+<#ReadValue> proto:elaborates :KnowledgeGoal;
+    rdfs:comment """
+        A user goal to read the value of some property of some subject.
+        """;
+    proto:hasParameter :property;
+    .
+    
+<#property> a proto:ExclusiveProperty;
+    rdfs:domain :ReadValue;
+    rdfs:comment """
+        <Read> :ta:subject <s>
+        <Read> ta:property <p>
+        As an ensemble asserts <Read> is a goal to read (the (g s p))
+        Where
+        <g> is a graph holding the context of the current goal.
+        """;
+    .
+
+
+<#acknowledgedBy> a proto:InclusiveProperty;
+    rdfs:domain :State;
+    rdfs:range :Operator;
+    rdfs:comment """
+        <State> ta:acknowledgedBy <Operator>
+        Asserts that <Operator> is used in the interface to indicate
+        your judgement that <State> is true.
+        """;
+    .
+    
+
+    
+
+    
+
+
+
+
+
+        

@@ -1,0 +1,327 @@
+{:http://rdf.naturallexicon.org/tasks/ont#StateDisjunction
+ {:rdf/type #{:http://rdf.naturallexicon.org/prototypes/ont#Prototype},
+  :rdfs/subClassOf #{:http://rdf.naturallexicon.org/tasks/ont#State},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#option},
+  :rdfs/comment
+  #{"\n        Refers to a state describable as one of a plurality of states.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#
+ {:rdf/type #{:owl/Ontology},
+  :rdfs/label #{"Task analysis"},
+  :rdfs/comment
+  #{"\n\n    A simple vocabulary dedicated to the pursuit of user goals,\n    typically in a computer interface.\n\n        "},
+  :http://rdf.naturallexicon.org/volumes/ont#addressedTo
+  #{:http://rdf.naturallexicon.org/tasks/ont#Graph},
+  :owl/imports
+  #{:http://rdf.naturallexicon.org/prototypes/ont#
+    :http://rdf.naturallexicon.org/volumes/ont#}},
+ :http://rdf.naturallexicon.org/tasks/ont#Event
+ {:rdf/type #{:rdfs/Class},
+  :rdfs/comment
+  #{"\n        Refers to an event while using an interface.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#outcomeOf
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/comment
+  #{"\n        <state> ta:outcomeOf <event>\n\n    Asserts thate <state> describes the expected outcome of <event>.\n    \n    This is typically expressed using the past particple X'd.\n    \n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#ListingFormat
+ {:rdf/type #{:rdf/Class},
+  :rdfs/comment
+  #{"\n        Refers to a format interpretable by some program as a list of \n        objects.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#determinedBy
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal
+    :http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdfs/comment
+  #{"\n        <Goal> ta:determinedBy <Inspect Something>\n        Asserts that <Inspect something>  allows you \n        to determine the status of <Goal>.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#planDescription
+ {:rdfs/subPropertyOf #{:dct/description},
+  :rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :rdfs/comment
+  #{"\n        <goal> ta:planDescription <description>\n        Asserts that <description> documents the place of <goal>\n        in the overall plan of execution for the host application.\n        Typically it starts off 'In order to .... it is necessary|helpful...\n        to ..., followed by a description of subgoals one might take, and\n        the circumstances under which you will be able to discern whether\n        and when to take such steps.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#targetDescription
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/FindData},
+  :rdfs/range #{:rdf/PlainLiteral},
+  :rdfs/comment
+  #{"\n    <find-data> ta:targetDescription <description>\n    \n    asserts <description> suits the data you are trying to find.\n        Where\n\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#goalType
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :http://rdf.naturallexicon.org/prototypes/ont#domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdfs/range
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoalClass},
+  :rdfs/comment
+  #{"\n        Refers to the unique primary class to which the referent goal \n        belongs. Typically keyed on to set new goals.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#fromCandidates
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :rdfs/comment
+  #{" \n        \n    A collection of candidates from which the specified thing(s)\n    are selected.\n\n    "}},
+ :http://rdf.naturallexicon.org/tasks/ont#ReadValue
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdfs/comment
+  #{"\n        A user goal to read the value of some property of some subject.\n        "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#property}},
+ :http://rdf.naturallexicon.org/tasks/ont#queryFormat
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#QueryFormat},
+  :rdfs/comment
+  #{"\n\n    <ReviewListing> ta:listing <list>.\n    <ReviewListing> ta:query <query>.\n    <ReviewListing> ta:queryFormat <format>.\n\n    Asserts that <query> is in <format> and will generate data from which \n    <list> can be inferred.\n\n    Where\n    <query> is in an application-specific <format>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#operatorLabel
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :rdfs/comment
+  #{"\n        <Operator> ta:operatorLabel <Label>\n        Asserts that when rendered in the interface it should\n        be rendered as <Label>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#Graph
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/volumes/ont#CatalogVolume},
+  :rdfs/comment
+  #{"\n  The graph to which the Task Analysis ontology is addressed.\n  "}},
+ :dct/description
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :rdfs/comment
+  #{"\n    rdfs:comment is inclusive, dc:description is occlusive.  Use\n    dc:description to specify the docstring to be rendered in the\n    browser.  \n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#dedicatedTo
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#Service},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdfs/comment
+  #{"\n\n    <interface> dedicatedTo <goal>\n\n    Asserts that <interface> aims to implement a plan for achieving <goal>\n\n    "}},
+ :http://rdf.naturallexicon.org/tasks/ont#UserGoal
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#Prototype
+    :http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdfs/comment
+  #{"\n    \n        Refers to a goal pursued by you the user.\n\n    "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#goalType}},
+ :http://rdf.naturallexicon.org/tasks/ont#specified
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/comment
+  #{"\n        The thing specified in a goal to specify.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#SelectForPurpose
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#Select},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#forPurpose},
+  :rdfs/comment #{"\n        Refers to a\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#State
+ {:rdf/type #{:rdfs/Class},
+  :rdfs/comment
+  #{"\n        Refers to a state within the operation of the program. \n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#listingFormat
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#ReviewListing},
+  :rdfs/range
+  #{:http://rdf.naturallexicon.org/tasks/ont#ListingFormat},
+  :rdfs/comment
+  #{"\n    <ReviewListing> ta:listing <list>.\n    <ReviewListing> ta:listingFormat <format>.\n\n    asserts that <list> contains the listing to review, and should\n    be rendered using <format>.\n    \n    Where\n    <list> is in an application-specific format.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#conditionedOn
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/comment
+  #{"\n        <event> ta:conditionedOn <state>;\n\n        Asserts that any process involving <event> must be in <state> for\n        <event> to occur.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#acknowledgedBy
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#State},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#Operator},
+  :rdfs/comment
+  #{"\n        <State> ta:acknowledgedBy <Operator>\n        Asserts that <Operator> is used in the interface to indicate\n        your judgement that <State> is true.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#engageWhen
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#Process},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#State},
+  :rdfs/comment
+  #{"\n        <process> ta:engageWhen <state>\n        Asserts that <process> is expected be initiated when in <State>.\n        "},
+  :owl/seeAlso
+  #{:http://rdf.naturallexicon.org/tasks/ont#disengageWhen}},
+ :http://rdf.naturallexicon.org/tasks/ont#forPurpose
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/comment
+  #{"\n        The purpose for which the thing was specified.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#Specify
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#Prototype
+    :http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#specified
+    :http://rdf.naturallexicon.org/tasks/ont#forPurpose
+    :http://rdf.naturallexicon.org/tasks/ont#as},
+  :rdfs/comment
+  #{"\n    <Specify> \n        specified <thing>;\n        as <role>;\n        forPurpose <purpose>;\n\n    \n    Work as an ensemble to assert that <thing> should serve\n    <role> for <purpose>, typically such that\n    <purpose> <role> <thing>.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#QueryFormat
+ {:rdf/type #{:rdf/Class},
+  :rdfs/comment
+  #{"\n        Refers to a query format interpretable by some program as a query \n        that supports finding some body of data.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#Process
+ {:rdf/type #{:rdfs/Class},
+  :rdfs/comment
+  #{"\n\n        Refers to a process characterized by a set of typical states\n        which follow each other in a cycle.\n\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#subject
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdfs/range #{:rdf/Resource},
+  :rdfs/comment
+  #{"\n        <Knowabout> ta:subject <subject>;\n        Asserts that <Knowabout> is dedicated to knowing about <subject>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#listing
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#ReviewListing},
+  :rdfs/comment
+  #{"\n\n    <ReviewListing> ta:listing <list>.\n    <ReviewListing> ta:listingFormat <format>.\n\n\n    asserts that <list> contains the listing to review, and should\n    be rendered using <format>.\n    \n    Where\n    <list> is in an application-specific format.\n\n\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#option
+ {:rdf/type #{:rdf/Property},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#StateDisjunction},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#State},
+  :rdfs/comment
+  #{"\n        <disjunctive state> ta:option <state>\n        Asserts that we are in <disjunctive state> if we are in <state>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#Service
+ {:rdf/type #{:http://rdf.naturallexicon.org/prototypes/ont#Prototype},
+  :rdfs/comment
+  #{"\n    Refers to a software service dedicated to one or more user goals\n    "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#dedicatedTo}},
+ :http://rdf.naturallexicon.org/tasks/ont#Review
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#queryFormat
+    :http://rdf.naturallexicon.org/tasks/ont#query}},
+ :http://rdf.naturallexicon.org/tasks/ont#Operator
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#Prototype
+    :rdfs/Class},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#operatorLabel
+    :http://rdf.naturallexicon.org/tasks/ont#causes},
+  :rdfs/comment
+  #{"\n        Something on the interface that changes the state of the system.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#as
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/comment
+  #{"\n        The role played by the specified thing(s)\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#ReviewListing
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#Review},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#ReviewListing},
+  :rdfs/comment
+  #{"\n\n    Refers to a user goal to review a listing of some set of data.\n    \n    Typically supports an elaboration on <find-data>\n\n    "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#listingFormat
+    :http://rdf.naturallexicon.org/tasks/ont#listing}},
+ :http://rdf.naturallexicon.org/tasks/ont#followsInCycle
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#OcclusiveProperty},
+  :rdfs/comment
+  #{"\n        <event2> followsInCycle <event1>\n\n    Asserts that <event2> follows <event1> in a cycle of events in the\n    context of some process.\n\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#FindData
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdfs/class #{:http://rdf.naturallexicon.org/tasks/ont#FindData},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#targetDescription}},
+ :http://rdf.naturallexicon.org/tasks/ont#Select
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#Specify},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#Select},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#fromCandidates}},
+ :http://rdf.naturallexicon.org/tasks/ont#ScanListingItem
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdf/type
+  #{:http://rdf.naturallexicon.org/tasks/ont#ScanListingItem},
+  :rdfs/comment
+  #{"\n        A user goal to glance at a brief summary of some entity in a listing.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#causedBy
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#Event},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#Operator},
+  :rdfs/comment
+  #{"\n        <Event> ta:causedBy <Operator>.\n        Asserts that the effect of using <Operator> is to cause <Event>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#InspectEntity
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdfs/comment
+  #{"\n        A user goal to inspect a single entity.\n        "},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#InspectEntity}},
+ :http://rdf.naturallexicon.org/tasks/ont#toScan
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#ScanListingItem},
+  :rdfs/range #{:rdf/Resource},
+  :rdfs/comment #{"\n        <Scan> ta:toScan <item> \n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#subEventOf
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/comment
+  #{"\n        <Event> ta:subEventOf <Larger Event>\n        Asserts that <Event> happens in the course of <LargerEvent>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#query
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/domain
+  #{:http://rdf.naturallexicon.org/tasks/ont#ReviewListing},
+  :rdfs/comment
+  #{"\n\n    <Review> ta:query <query>.\n    <Review> ta:queryFormat <format>.\n\n    Asserts that <query> is in <format> \n\n    Where\n    <query> is in an application-specific <format>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#UserInterface
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#Service},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#Process},
+  :rdfs/comment
+  #{"\n        Refers to an interactive Service \n        "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#engageWhen
+    :http://rdf.naturallexicon.org/tasks/ont#disengageWhen}},
+ :http://rdf.naturallexicon.org/tasks/ont#causes
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :owl/inverseOf #{:http://rdf.naturallexicon.org/tasks/ont#causedBy},
+  :rdfs/comment
+  #{"\n        <Operator> ta:causes <Event>.\n        Asserts that the effect of using <Operator> is to cause <Event>\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#property
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#ExclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#ReadValue},
+  :rdfs/comment
+  #{"\n        <Read> :ta:subject <s>\n        <Read> ta:property <p>\n        As an ensemble asserts <Read> is a goal to read (the (g s p))\n        Where\n        <g> is a graph holding the context of the current goal.\n        "}},
+ :http://rdf.naturallexicon.org/tasks/ont#disengageWhen
+ {:rdf/type
+  #{:http://rdf.naturallexicon.org/prototypes/ont#InclusiveProperty},
+  :rdfs/domain #{:http://rdf.naturallexicon.org/tasks/ont#Process},
+  :rdfs/range #{:http://rdf.naturallexicon.org/tasks/ont#State},
+  :rdfs/comment
+  #{"\n        <process> ta:disengageWhen <state>\n        Asserts that <process> is expected continue until we encounter <state>.\n        "},
+  :owl/seeAlso #{:http://rdf.naturallexicon.org/tasks/ont#engageWhen}},
+ :http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal
+ {:http://rdf.naturallexicon.org/prototypes/ont#elaborates
+  #{:http://rdf.naturallexicon.org/tasks/ont#UserGoal},
+  :rdf/type #{:http://rdf.naturallexicon.org/tasks/ont#KnowledgeGoal},
+  :rdfs/comment
+  #{"\n        Refers to a goal to know something about the state of the \n        application or the wider world, typically by inspecting\n        some part of the interface.\n        "},
+  :http://rdf.naturallexicon.org/prototypes/ont#hasParameter
+  #{:http://rdf.naturallexicon.org/tasks/ont#subject}}}
