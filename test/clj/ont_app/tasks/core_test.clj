@@ -9,4 +9,4 @@
 
 (deftest ontology-test
   (testing "Ontology declaration should exist"
-    (is (not (nil? (tasks/ontology))))))
+    (is (not (nil? tasks/ontology)))))

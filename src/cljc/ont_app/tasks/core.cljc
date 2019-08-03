@@ -23,10 +23,10 @@
   })
 
 
-(declare ontology-cache)
-(defn clear-caches! []
-  "SIDE EFFECTS: resets caches to initial state."
-  (reset! ontology-cache nil))
+;; (declare ontology-cache)
+;; (defn clear-caches! []
+;;   "SIDE EFFECTS: resets caches to initial state."
+;;   (reset! ontology-cache nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FUN WITH READER MACROS
@@ -49,15 +49,24 @@
 
 ;; NO READER MACROS BELOW THIS POINT
 
-(def ontology-cache (atom nil))
-(defn ontology []
-  "The supporting ontology for prototypes, as an Igraph.graph, using keyword
-  identifiers interned per ont-app.vocabulary. Includes the prototypes ontology.
-  "
-  (when-not @ontology-cache
-    (reset! ontology-cache
-            (-> (read-ontology)
-                (igraph/union (proto/ontology)
-                ))))
-  @ontology-cache)
+;; (defonce ontology-cache (atom nil))
+;; (defn ontology []
+;;   "The supporting ontology for prototypes, as an Igraph.graph, using keyword
+;;   identifiers interned per ont-app.vocabulary. Includes the prototypes ontology.
+;;   "
+;;   (when-not @ontology-cache
+;;     (reset! ontology-cache
+;;             (-> (read-ontology)
+;;                 (igraph/union (proto/ontology))
+;;                 )))
+;;   @ontology-cache)
 
+(defonce ontology
+  (let []
+    (voc/clear-caches!)
+    (reduce-s-p-o igv/resolve-namespace-prefixes
+                  (g/make-graph)
+                  (read-ontology))))
+
+
+                   
