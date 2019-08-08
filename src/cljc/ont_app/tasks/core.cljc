@@ -10,6 +10,13 @@
    )
   )
 
+(voc/cljc-put-ns-meta!
+ 'ont-app.tasks.core
+ {
+  :voc/mapsTo 'ont-app.tasks.ont
+  }
+ )
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FUN WITH READER MACROS
 ;;;;;;;;;;;;;;;;;;;;;;;;;;

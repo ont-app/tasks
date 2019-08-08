@@ -17,7 +17,7 @@
   )
 
 (voc/cljc-put-ns-meta!
- 'ont-app.tasks.core
+ 'ont-app.tasks.ont
  {                   
   :rdfs/comment "Holds constructs for task analysis and modeling"
   :vann/preferredNamespacePrefix "tasks"
