@@ -316,11 +316,8 @@
   :rdfs/label #{"Task analysis"},
   :rdfs/comment
   #{"\n\n    A simple vocabulary dedicated to the pursuit of user goals,\n    typically in a computer interface.\n\n        "},
-  :http+58++47++47+rdf.naturallexicon.org+47+volumes+47+ont#addressedTo
-  #{:http+58++47++47+rdf.naturallexicon.org+47+tasks+47+ont#Graph},
   :owl/imports
-  #{:http+58++47++47+rdf.naturallexicon.org+47+volumes+47+ont#
-    :http+58++47++47+rdf.naturallexicon.org+47+prototypes+47+ont#}},
+  #{:http+58++47++47+rdf.naturallexicon.org+47+prototypes+47+ont#}},
  :http+58++47++47+rdf.naturallexicon.org+47+tasks+47+ont#Operator
  {:rdf/type
   #{:http+58++47++47+rdf.naturallexicon.org+47+prototypes+47+ont#Prototype
@@ -339,11 +336,6 @@
   #{:http+58++47++47+rdf.naturallexicon.org+47+tasks+47+ont#Operator},
   :rdfs/comment
   #{"\n        <Event> ta:causedBy <Operator>.\n        Asserts that the effect of using <Operator> is to cause <Event>\n        "}},
- :http+58++47++47+rdf.naturallexicon.org+47+tasks+47+ont#Graph
- {:http+58++47++47+rdf.naturallexicon.org+47+prototypes+47+ont#elaborates
-  #{:http+58++47++47+rdf.naturallexicon.org+47+volumes+47+ont#CatalogVolume},
-  :rdfs/comment
-  #{"\n  The graph to which the Task Analysis ontology is addressed.\n  "}},
  :http+58++47++47+rdf.naturallexicon.org+47+tasks+47+ont#causes
  {:rdf/type
   #{:http+58++47++47+rdf.naturallexicon.org+47+prototypes+47+ont#InclusiveProperty},

@@ -7,7 +7,6 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
 @prefix proto: <http://rdf.naturallexicon.org/prototypes/ont#>.
-@prefix vol: <http://rdf.naturallexicon.org/volumes/ont#>.
 @prefix dc: <http://purl.org/dc/elements/1.1/>.
 
 <#> a owl:Ontology;
@@ -18,16 +17,9 @@
     typically in a computer interface.
 
         """;
-    vol:addressedTo <#Graph>;
-    owl:imports <http://rdf.naturallexicon.org/prototypes/ont#>,
-                 <http://rdf.naturallexicon.org/volumes/ont#>;
+    owl:imports <http://rdf.naturallexicon.org/prototypes/ont#>
     .
 
-<#Graph> proto:elaborates vol:CatalogVolume;
-  rdfs:comment """
-  The graph to which the Task Analysis ontology is addressed.
-  """;
-    .
 
 dc:description a proto:OcclusiveProperty;
     rdfs:comment """
@@ -518,14 +510,6 @@ dc:description a proto:OcclusiveProperty;
         your judgement that <State> is true.
         """;
     .
-    
-
-    
-
-    
-
-
-
 
 
         

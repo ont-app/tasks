@@ -1,10 +1,28 @@
 # tasks
 
-FIXME: Write a one-line description of your library/project.
+UNDER CONSTRUCTION
+
+This aims to provide an ontology with accomanying logic to support performing a task analysis, and for modeling a task as an IGraph-based model. 
+
+This ontology is encoded in Clojure in graphs implementing the IGraph protocol. 
+It aims to align with RDF representaions.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+The ontology allows expressing the answers to questions like:
+
+- What user goals are in play?
+- Which of these are the primary goals, definitive of your application or service?
+- Why pursue such goals? (what larger goals do they support?)
+- When are you done?
+- How do you know you're done?
+- What states might you be in that fall short of being done?
+- How do you know you're in those states?
+- What can you do about being in those states?
+- How do you know that that's what you can do?
+
+Watch this space for more details
+
 
 ## Setup
 
@@ -34,6 +52,6 @@ get live reloading, nor a REPL.
 
 ## License
 
-Copyright © 2014 FIXME
+Copyright © 2019 Eric D. Scott
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
